@@ -44,6 +44,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs.cucumber.cucumber_node_package_dir": "",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -226,7 +227,7 @@
       <workItem from="1678197864638" duration="31046000" />
       <workItem from="1678267751105" duration="93000" />
       <workItem from="1678267939844" duration="1036000" />
-      <workItem from="1678268999480" duration="13470000" />
+      <workItem from="1678268999480" duration="17393000" />
     </task>
     <task id="LOCAL-00001" summary="Removing Excess import and Time">
       <created>1678283743802</created>
@@ -235,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678283743802</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Removing Excess import and Time">
+      <created>1678283944370</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678283944370</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
