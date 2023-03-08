@@ -1,10 +1,6 @@
-import os
-import time
 from behave import *
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
-use_step_matcher("re")
 
 
 @given("I am on the Basic Form page")
@@ -41,19 +37,19 @@ def basic_controls(context):
         assert selected_value == span_value
 
     context.driver.find_element(By.ID, "select_tool")
-    list = context.driver.find_element(By.CSS_SELECTOR, "#select_tool > option:nth-child(3)")
-    list.click()
-    if list.is_selected():
-        selected_value = list.get_attribute("value")
+    list_item = context.driver.find_element(By.CSS_SELECTOR, "#select_tool > option:nth-child(3)")
+    list_item.click()
+    if list_item.is_selected():
+        selected_value = list_item.get_attribute("value")
         select_tool_validate = context.driver.find_element(By.ID, "select_tool_validate").get_attribute('innerHTML')
-    assert selected_value == select_tool_validate
+        assert selected_value == select_tool_validate
+
     select_lang = context.driver.find_element(By.ID, "select_lang")
     jv_lang = context.driver.find_element(By.XPATH, "//*[@id='select_lang']/option[1]")
     jv_lang.click()
     py_lang = context.driver.find_element(By.XPATH, "//*[@id='select_lang']/option[2]")
     py_lang.click()
     language_validate = context.driver.find_element(By.ID, "select_lang_validate").get_attribute('innerHTML').split(',')
-
     select_values = [option.get_attribute('value') for option in
                      select_lang.find_elements(By.CSS_SELECTOR, "option:checked")]
 
@@ -66,13 +62,12 @@ def basic_controls(context):
     assert text_area.get_attribute('innerHTML') == expected_value
     common_sense = context.driver.find_element(By.ID, 'common_sense')
     print(common_sense.get_attribute('placeholder'))
-    # Level selected
+
     context.driver.find_element(By.XPATH, "//label[@for='german']").click()
     context.driver.find_element(By.XPATH, "//label[@for='german']").click()
     german_validate = context.driver.find_element(By.ID, "german_validate")
-    print("Speaks German : ", german_validate.text)
+    print("Speaks German :", german_validate.text)
 
-    # Find the range input element and set the value to 4
     range_input = context.driver.find_element(By.ID, 'fluency')
     context.driver.execute_script(
         "arguments[0].value = '4'; arguments[0].dispatchEvent(new Event('change'))",
@@ -82,13 +77,10 @@ def basic_controls(context):
     assert span_element == current_value, f" value {span_element}, but got {current_value}"
 
     context.driver.execute_script("window.scrollBy(0, 700)")
-    time.sleep(1)
     context.driver.find_element(By.ID, "upload_cv").send_keys('/Users/ankushsharma/Documents/Docfile.docx')
-
     file_input = context.driver.find_element(By.ID, 'upload_files')
     file_input.send_keys('/Users/ankushsharma/Downloads/Krebsregistermeldung_OncoAssist_20230228_1529.xml')
     file_input.send_keys('/Users/ankushsharma/Downloads/Krebsregistermeldung_OncoAssist_20230228_1528.xml')
-
     validate_files = context.driver.find_element(By.ID, 'validate_files')
     uploaded_files = validate_files.text
     assert 'Krebsregistermeldung_OncoAssist_20230228_1529.xml' in uploaded_files
@@ -96,7 +88,6 @@ def basic_controls(context):
 
     salary = context.driver.find_element(By.ID, 'salary')
     assert salary.get_attribute('placeholder') == 'You should not provide this'
-    time.sleep(2)
 
 
 @then("I click Submit on Form with Validation Form")
@@ -106,7 +97,6 @@ def validation_form(context):
     state_field = context.driver.find_element(By.ID, "validationCustom04")
     zip_field = context.driver.find_element(By.ID, "validationCustom05")
     terms_checkbox = context.driver.find_element(By.ID, "invalidCheck")
-
     submit_button.click()
 
     # check if any of the required fields is empty
@@ -117,7 +107,6 @@ def validation_form(context):
     city_field.send_keys("Hamburg")
     print(f"City field entered: {city_field.get_attribute('value') or 'not entered'}")
 
-    state_field.send_keys("HB")
     print(f"State field entered: {state_field.get_attribute('value') or 'not entered'}")
 
     zip_field.send_keys("22457")
@@ -136,7 +125,6 @@ def non_english(context):
     # Interact with non-English label
     input_field = context.driver.find_element(By.ID, 'नाव')
     input_field.send_keys("My Name is ")
-
     checkbox_marathi = context.driver.find_element(By.ID, "मराठी")
     checkbox_marathi.click()
     checkbox_guj = context.driver.find_element(By.ID, "ગુજરાતી")

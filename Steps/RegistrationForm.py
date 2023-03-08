@@ -1,5 +1,4 @@
 import re
-import time
 from behave import *
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -7,7 +6,9 @@ from selenium.webdriver.common.by import By
 
 @given("I am on the Registration page")
 def openbrowser(context):
-    context.driver = webdriver.Chrome()
+    context.options = webdriver.ChromeOptions()
+    context.options.add_argument('--start-maximized')
+    context.driver = webdriver.Chrome(options=context.options)
     context.driver.get("https://www.way2automation.com/way2auto_jquery/registration.php#load_box")
     expected_url = "https://www.way2automation.com/way2auto_jquery/registration.php#load_box"
     actual_url = context.driver.current_url
@@ -82,8 +83,6 @@ def enter_details(context):
         print("Password Matched")
     else:
         print("Password does not match")
-
-    time.sleep(1)
 
 
 @then("I click on Submit")
